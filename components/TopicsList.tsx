@@ -20,7 +20,7 @@ export default async function TopicsList(){
     const {topics} = await getTopics() || {};
     return (
         <>
-            {topics.map((topic: any) => (
+            {topics && topics.map((topic: any) => (
             // eslint-disable-next-line react/jsx-key
             <div className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start">
                 <div>
