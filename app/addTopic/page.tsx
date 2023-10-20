@@ -1,14 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
 export default function AddTopic(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-
-    const router = useRouter();
 
     const handleSubmit = async (e:any) =>{
         e.preventDefault();
@@ -19,7 +16,7 @@ export default function AddTopic(){
         }
 
         try {
-            const res = await fetch("http://localhost:3001/api/topics",{
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/topics`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -27,7 +24,7 @@ export default function AddTopic(){
                 body: JSON.stringify({title,description}),
             });
             if(res.ok){
-                router.push('/');
+                location.href = "/";
             }else{
                 throw new Error("Failed to create a topic");
             }
